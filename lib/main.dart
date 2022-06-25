@@ -13,6 +13,11 @@ class Main extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: onGenerateRoute,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.greenAccent,
+        highlightColor: Color.fromRGBO(0, 0, 0, 0),
+        splashColor: Color.fromRGBO(0, 0, 0, 0),
+      ),
     );
   }
 }

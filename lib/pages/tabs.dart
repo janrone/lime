@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:lime/pages/book.dart';
 import 'package:lime/pages/chart.dart';
 import 'package:lime/pages/dtail.dart';
@@ -13,14 +14,14 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   List navigationBarItem = [
-    const Dtail(),
-    const Chart(),
-    const Record(),
-    const Book(),
-    const Individual(),
+    Dtail(),
+    Chart(),
+    Record(),
+    Book(),
+    Individual(),
   ];
 
   @override
@@ -32,41 +33,62 @@ class _TabsState extends State<Tabs> {
           _currentIndex = index;
         }),
         currentIndex: _currentIndex,
-        fixedColor: Colors.blue,
+        fixedColor: HexColor('#54C395'),
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.article),
             label: '明细',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.addchart),
             label: '报表',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
+              Icons.add,
               color: Colors.white,
             ),
             backgroundColor: Colors.white,
             label: '记账',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.auto_stories),
             label: '账本',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.person),
             label: '我的',
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          elevation: 0,
-          onPressed: () => null,
-          child: Icon(Icons.add),
-          splashColor: Colors.white),
+        elevation: 0,
+        onPressed: () => {Navigator.of(context).push(_createRoute())},
+        child: Icon(Icons.add),
+        splashColor: Colors.white,
+        backgroundColor: HexColor('#54C395'),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => Record(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0, 1);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }

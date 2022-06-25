@@ -9,9 +9,9 @@ import 'package:lime/pages/tabs.dart';
 final routes = {
   '/': () =>  Tabs(),
   // Tab buttom
-  '/dtail': () => const Dtail(),
-  '/chart': () => const Chart(),
-  '/record': () => const Record(),
-  '/book': () => const Book(),
-  '/individual': () => const Individual(),
+  '/dtail': () =>  Dtail(),
+  '/chart': () =>  Chart(),
+  '/record': () =>  Record(),
+  '/book': () =>  Book(),
+  '/individual': () =>  Individual(),
 };
